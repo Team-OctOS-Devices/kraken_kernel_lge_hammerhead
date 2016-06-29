@@ -120,6 +120,13 @@ config CPU_FREQ_DEFAULT_GOV_DARKNESS
 	select CPU_FREQ_GOV_DARKNESS
 	help
 
+config CPU_FREQ_DEFAULT_GOV_WHEATLEY
+	bool "wheatley"
+	select CPU_FREQ_GOV_WHEATLEY
+	select CPU_FREQ_GOV_PERFORMANCE
+	help
+	  Use the CPUFreq governor 'wheatley' as default.
+	  
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -227,6 +234,13 @@ config CPU_FREQ_GOV_DARKNESS
 	tristate "'darkness' cpufreq governor"
 	depends on CPU_FREQ
 	select CPU_FREQ_GOV_COMMON
+
+	#The governor is based on interactive to provide a resident controller
+	#which interprets unnecessary battery drain as evil.
+
+config CPU_FREQ_GOV_WHEATLEY
+	   tristate "'wheatley' cpufreq governor"
+	   depends on CPU_FREQ
 
 config CPU_BOOST
 	tristate "Event base short term CPU freq boost"
